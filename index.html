@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body onload="initializeTabung()">
+
+  <div style="padding:15px;text-align:center;">
+    <h1>Rekod Kewangan Masjid</h1>
+  </div>
+
+  <div class="topnav" id="myTopnav">
+    <a href="javascript:void(0);" onclick="toggleMode()"><i class="fa fa-lightbulb-o"></i></a>
+    <a href="index.html" class="active">Utama</a>
+    <a href="penerimaan.html">Rekod Penerimaan</a>
+    <a href="pembayaran.html">Rekod Pembayaran</a>
+    <a href="lapor.html">Lapor</a>
+    <a href="javascript:void(0);" class="icon" onclick="menuFunction()">
+      <i class="fa fa-bars"></i>
+    </a>
+
+  </div>
+
+  <div>
+    <h2>Baki Keseluruhan</h2>
+    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+      dolore magna aliquam erat volutpat.</p>
+  </div>
+
+  <table>
+    <caption>Rumusan</caption>
+    <thead>
+      <tr>
+        <th scope="col">Tabung <i class="fa fa-bank"></i></th>
+        <th scope="col">Amaun <i class="fa fa-money"></i></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td id="tabungA" scope="row" data-label="Tabung" contenteditable='true'></td>
+        <td id="amaunA" data-label="Amaun"></td>
+      </tr>
+      <tr>
+        <td id="tabungB" scope="row" data-label="Tabung" contenteditable='true'>B</td>
+        <td id="amaunB" data-label="Amaun"></td>
+      </tr>
+      <tr>
+        <td id="tabungC" scope="row" data-label="Tabung" contenteditable='true'>C</td>
+        <td id="amaunC" data-label="Amaun"></td>
+      </tr>
+      <tr>
+        <td id="tabungD" scope="row" data-label="Tabung" contenteditable='true'>D</td>
+        <td id="amaunD" data-label="Amaun"></td>
+      </tr>
+    <tfoot>
+      <tr>
+        <th scope="row" data-label="Tabung">Keseluruhan <i class="fa fa-usd"></i></td>
+        <td id="amaunSemua" data-label="Amaun"></td>
+      </tr>
+    </tfoot>
+    </tbody>
+  </table>
+
+</body>
+
+<script src="main.js"></script>
+<script src="tabung.js"></script>
+
+</html>

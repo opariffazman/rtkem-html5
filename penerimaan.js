@@ -1,18 +1,3 @@
-const localStorage = window.localStorage;
-function initializeTabung() {
-  if (localStorage) {
-    const tabungA = localStorage.getItem("tabungA") || "A";
-    const tabungB = localStorage.getItem("tabungB") || "B";
-    const tabungC = localStorage.getItem("tabungC") || "C";
-    const tabungD = localStorage.getItem("tabungD") || "D";
-
-    document.getElementById("tabungA").innerHTML = `${tabungA}`;
-    document.getElementById("tabungB").innerHTML = `${tabungB}`;
-    document.getElementById("tabungC").innerHTML = `${tabungC}`;
-    document.getElementById("tabungD").innerHTML = `${tabungD}`;
-  }
-}
-
 function setInput(theForm) {
   let tarikh = (theForm.elements['tarikh']).value;
   let destinasi = (theForm.elements['destinasi']).value;
@@ -34,6 +19,27 @@ function setInput(theForm) {
   const amaunBaru = parseFloat(tabungStorage) + parseFloat(amaun);
   localStorage.setItem(tabungDestinasi, amaunBaru);
 
-  console.log(tarikh, destinasi, perkara, amaun, amaunBaru);
+  addNewRekod(tarikh, destinasi, perkara, amaun);
   document.getElementById("rekod").reset();
 }
+
+function addNewRekod(tarikh, destinasi, perkara, amaun) {
+  let destinasiTabung = localStorage.getItem(`${destinasi}`) || destinasi;
+
+  console.log("Rekod: " + tarikh, destinasiTabung, perkara, amaun);
+
+  var rekods = [];
+
+  var rekod = {
+    "tarikh": tarikh,
+    "tabung": destinasiTabung,
+    "perkara": perkara,
+    "amaun": amaun
+  };
+
+  rekods.push(rekod);
+  rekods = rekods.concat(JSON.parse(localStorage.getItem("rekods")||'[]'));
+  console.log(rekods);
+
+  localStorage.setItem("rekods", JSON.stringify(rekods));
+};

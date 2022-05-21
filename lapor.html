@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body onload="setTabung()">
 
   <div style="padding:15px;text-align:center;">
     <h1>Rekod Kewangan Masjid</h1>
@@ -15,10 +15,10 @@
 
   <div class="topnav" id="myTopnav">
     <a href="javascript:void(0);" onclick="toggleMode()"><i class="fa fa-lightbulb-o"></i></a>
-    <a href="index.html" >Utama</a>
+    <a href="index.html">Menu Utama</a>
     <a href="penerimaan.html">Rekod Penerimaan</a>
     <a href="pembayaran.html">Rekod Pembayaran</a>
-    <a href="lapor.html" class="active">Lapor</a>
+    <a href="lapor.html" class="active">Laporan</a>
     <a href="javascript:void(0);" class="icon" onclick="menuFunction()">
       <i class="fa fa-bars"></i>
     </a>
@@ -26,13 +26,46 @@
   </div>
 
   <div>
-    <h2>Laporan</h2>
-    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
-      dolore magna aliquam erat volutpat.</p>
+    <form id="lapor" action="javascript:;" onsubmit="setLaporan(this)" style="max-width:500px;margin:auto">
+      <h2>Laporan Kenyataan</h2>
+
+      <div class="input-container">
+        <i class="fa fa-bank input-icon"></i>
+        <select id="tabung" class="input-field" name="tabung" required onchange="setTahun(this.value)">
+          <option value="" selected disabled hidden>Tabung</option>
+        </select>
+      </div>
+
+      <div class="input-container">
+        <i class="fa fa-calendar input-icon"></i>
+        <select id="tahun" class="input-field" name="tahun" required>
+          <option value="" selected disabled hidden>Tahun</option>
+        </select>
+      </div>
+
+      <div class="input-container">
+        <i class="fa fa-history input-icon"></i>
+        <input id="bulan" class="input-field" type="number" min="0" max="12" step="1" value="0">
+      </div>
+
+      <button type="submit" class="btn">Lihat <i class="fa fa-search"></i></button>
+    </form>
   </div>
+
+  <table id="laporan">
+    <caption>Rumusan</caption>
+    <tbody>
+      <tr>
+        <th class="thLapor">Tarikh <i class="fa fa-calendar"></i></th>
+        <th class="thLapor">Perkara <i class="fa fa-edit"></i></th>
+        <th class="thLapor">Amaun <i class="fa fa-money"></i></th>
+      </tr>
+    </tbody>
+  </table>
 
 </body>
 
 <script src="main.js"></script>
+<script src="lapor.js"></script>
 
 </html>

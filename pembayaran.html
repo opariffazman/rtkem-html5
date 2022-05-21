@@ -15,10 +15,10 @@
 
   <div class="topnav" id="myTopnav">
     <a href="javascript:void(0);" onclick="toggleMode()"><i class="fa fa-lightbulb-o"></i></a>
-    <a href="index.html">Utama</a>
+    <a href="index.html">Menu Utama</a>
     <a href="penerimaan.html">Rekod Penerimaan</a>
     <a href="pembayaran.html" class="active">Rekod Pembayaran</a>
-    <a href="lapor.html">Lapor</a>
+    <a href="lapor.html">Laporan</a>
     <a href="javascript:void(0);" class="icon" onclick="menuFunction()">
       <i class="fa fa-bars"></i>
     </a>
@@ -27,22 +27,24 @@
   <div>
     <form id="rekod" action="javascript:;" onsubmit="setInput(this)" style="max-width:500px;margin:auto">
       <h2>Transaksi Pembayaran</h2>
-      <div class="input-container">
-        <i class="fa fa-calendar input-icon"></i>
-        <input class="input-field" type="date" placeholder="Tarikh" name="tarikh" required>
-      </div>
 
       <div class="input-container">
-        <i class="fa fa-arrow-circle-up input-icon"></i>
+        <i class="fa fa-bank input-icon"></i>
         <!-- <input class="input-field" type="text" placeholder="Destinasi" name="destinasi" required> -->
         <select id="tabung" class="input-field" name="sumber" required>
-          <option value="" selected disabled hidden>Sumber</option>
+          <option value="" selected disabled hidden>Sumber Tabung</option>
           <option id="tabungA" value="tabungA"></option>
           <option id="tabungB" value="tabungB"></option>
           <option id="tabungC" value="tabungC"></option>
           <option id="tabungD" value="tabungD"></option>
         </select>
       </div>
+
+      <div class="input-container">
+        <i class="fa fa-calendar input-icon"></i>
+        <input class="input-field" type="date" placeholder="Tarikh" name="tarikh" required>
+      </div>
+
 
       <div class="input-container">
         <i class="fa fa-pencil input-icon"></i>

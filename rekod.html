@@ -16,8 +16,7 @@
   <div class="topnav" id="myTopnav">
     <a href="javascript:void(0);" onclick="toggleMode()"><i class="fa fa-lightbulb-o"></i></a>
     <a href="index.html">Menu Utama</a>
-    <a href="penerimaan.html" class="active">Rekod Penerimaan</a>
-    <a href="pembayaran.html">Rekod Pembayaran</a>
+    <a href="rekod.html" class="active">Rekod</a>
     <a href="lapor.html">Laporan</a>
     <a href="javascript:void(0);" class="icon" onclick="menuFunction()">
       <i class="fa fa-bars"></i>
@@ -26,17 +25,21 @@
 
   <div>
     <form id="rekod" action="javascript:;" onsubmit="setInput(this)" style="max-width:500px;margin:auto">
-      <h2>Transaksi Penerimaan</h2>
+      <h2>Rekod Transaksi</h2>
+
+      <div class="input-container">
+        <i class="fa fa-exchange input-icon"></i>
+        <select id="transaksi" class="input-field" name="transaksi" required>
+          <option value="" selected disabled hidden>Jenis Transaksi</option>
+          <option>Penerimaan</option>
+          <option>Pengeluaran</option>
+        </select>
+      </div>
 
       <div class="input-container">
         <i class="fa fa-bank input-icon"></i>
-        <!-- <input class="input-field" type="text" placeholder="Destinasi" name="destinasi" required> -->
         <select id="tabung" class="input-field" name="destinasi" required>
-          <option value="" selected disabled hidden>Destinasi Tabung</option>
-          <option id="tabungA" value="tabungA"></option>
-          <option id="tabungB" value="tabungB"></option>
-          <option id="tabungC" value="tabungC"></option>
-          <option id="tabungD" value="tabungD"></option>
+          <option value="" selected disabled hidden>Tabung</option>
         </select>
       </div>
 
@@ -61,6 +64,6 @@
 </body>
 
 <script src="main.js"></script>
-<script src="penerimaan.js"></script>
+<script src="rekod.js"></script>
 
 </html>

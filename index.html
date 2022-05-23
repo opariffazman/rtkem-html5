@@ -16,8 +16,7 @@
   <div class="topnav" id="myTopnav">
     <a href="javascript:void(0);" onclick="toggleMode()"><i class="fa fa-lightbulb-o"></i></a>
     <a href="index.html" class="active">Menu Utama</a>
-    <a href="penerimaan.html">Rekod Penerimaan</a>
-    <a href="pembayaran.html">Rekod Pembayaran</a>
+    <a href="rekod.html">Rekod</a>
     <a href="lapor.html">Laporan</a>
     <a href="javascript:void(0);" class="icon" onclick="menuFunction()">
       <i class="fa fa-bars"></i>
@@ -27,43 +26,24 @@
 
   <div>
     <h2>Baki Keseluruhan</h2>
-    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
-      dolore magna aliquam erat volutpat.</p>
+    <p>Sila ubah nama tabung mengikut kesesuaian masjid anda. Penambahan tabung hanya dibenarkan sehingga 7 tabung sahaja.</p>
   </div>
 
-  <table>
-    <caption>Rumusan</caption>
-    <thead>
+  <table id="tabung">
+    <caption>Senarai Tabung</caption>
+    <tbody>
       <tr>
         <th scope="col">Tabung <i class="fa fa-bank"></i></th>
         <th scope="col">Amaun <i class="fa fa-money"></i></th>
       </tr>
-    </thead>
-    <tbody>
       <tr>
-        <td id="tabungA" scope="row" data-label="Tabung" contenteditable='true'></td>
-        <td id="amaunA" data-label="Amaun"></td>
+        <th scope="row" data-label="Tabung">Keseluruhan <i class="fa fa-usd"></i></th>
+        <th id="amaunSemua" data-label="Amaun"></th>
       </tr>
-      <tr>
-        <td id="tabungB" scope="row" data-label="Tabung" contenteditable='true'></td>
-        <td id="amaunB" data-label="Amaun"></td>
-      </tr>
-      <tr>
-        <td id="tabungC" scope="row" data-label="Tabung" contenteditable='true'></td>
-        <td id="amaunC" data-label="Amaun"></td>
-      </tr>
-      <tr>
-        <td id="tabungD" scope="row" data-label="Tabung" contenteditable='true'></td>
-        <td id="amaunD" data-label="Amaun"></td>
-      </tr>
-    <tfoot>
-      <tr>
-        <th scope="row" data-label="Tabung">Keseluruhan <i class="fa fa-usd"></i></td>
-        <td id="amaunSemua" data-label="Amaun"></td>
-      </tr>
-    </tfoot>
     </tbody>
   </table>
+  <br>
+  <button type="submit" class="btn" onclick="addTabung()">Tambah Tabung <i class="fa fa-plus-square"></i></button>
 
 </body>
 

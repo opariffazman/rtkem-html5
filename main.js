@@ -1,9 +1,17 @@
 const localStorage = window.localStorage;
+var parsedTabung = JSON.parse(localStorage.getItem("tabungs")) || '[]';
 
 function initializeTabung() {
-  if (localStorage) {
+  if (!localStorage) return;
 
+  if (parsedTabung == '[]') return; // skip tabung info build
+
+  let selectTabung = document.getElementById('tabung');
+  for (let i = parsedTabung.length - 1; i >= 0; i--) {
+    let nama = parsedTabung[i].nama;
+    selectTabung.add(new Option(nama, nama));
   }
+
 }
 
 function menuFunction() {
@@ -19,7 +27,7 @@ var storedTheme = localStorage.getItem('theme') || (window.matchMedia("(prefers-
 if (storedTheme)
   document.documentElement.setAttribute('data-theme', storedTheme);
 
-function toggleMode () {
+function toggleMode() {
   var currentTheme = document.documentElement.getAttribute("data-theme");
   var targetTheme = "light";
 

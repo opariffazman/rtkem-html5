@@ -1,27 +1,19 @@
 var parsedRekod = JSON.parse(localStorage.getItem("rekods")) || '[]';
+var parsedTabung = JSON.parse(localStorage.getItem("tabungs")) || '[]';
 
 function addTabung() {
-  let answer = prompt('Nama tabung?');
+  let answer = prompt('Isi nama tabung', 'Nama unik');
 
-  if (!answer) {
-    console.log('no tabung name');
-    return;
-  }
+  if (!answer || answer == "Nama unik") return;
 
-  let parsedTabung = JSON.parse(localStorage.getItem("tabungs")) || '[]';
-  let duplicateExists = '';
+  let duplicateName = '';
 
-  if (parsedTabung != '[]') duplicateExists = parsedTabung.find(element => element.nama === answer);
+  if (parsedTabung != '[]') // skip check for first time
+    duplicateName = parsedTabung.find(element => element.nama === answer);
 
-  if (duplicateExists) {
-    console.log('duplicate tabung name');
-    return;
-  }
+  if (duplicateName) return;
 
-  if (parsedTabung.length > 6) {
-    console.log('max tabung reached');
-    return;
-  }
+  if (parsedTabung.length > 6) return; // max tabung
 
   let tabungs = [];
   let tabung = {
@@ -34,6 +26,7 @@ function addTabung() {
   console.log(tabungs);
 
   localStorage.setItem("tabungs", JSON.stringify(tabungs));
+  parsedTabung = JSON.parse(localStorage.getItem("tabungs")); // updateTabung
 
   addTabungTable(tabung.nama, tabung.amaun);
 }
@@ -41,95 +34,53 @@ function addTabung() {
 function addTabungTable(nama, amaun) {
   let tabungHead = ['Tabung', 'Amaun'];
   let tabungTable = document.getElementById('tabung');
-  let tableRow = tabungTable.insertRow(1); // insert in between
+  let tableRow = tabungTable.insertRow(tabungTable.rows.length - 1); // insert in between
 
-  for (let index = 0; index < tabungHead.length; index++) {
+  for (let i = 0; i < tabungHead.length; i++) {
     let tableData = document.createElement('td'); // table definition.
-    tableData = tableRow.insertCell(index);
+    tableData = tableRow.insertCell(i);
     tableData.setAttribute('scope', 'row');
-    tableData.setAttribute('data-label', tabungHead[index]);
+    tableData.setAttribute('data-label', tabungHead[i]);
+    tableData.setAttribute('value', nama);
 
-    let cellText = tabungHead[index] == 'Tabung' ? document.createTextNode(nama + " ") : document.createTextNode(amaun);
+    let cellText = tabungHead[i] == 'Tabung' ? document.createTextNode(nama + " ") : document.createTextNode(amaun);
     tableData.appendChild(cellText);
 
-    if (tabungHead[index] != 'Tabung') return;
+    if (tabungHead[i] != 'Tabung') return;
 
-    let cellIcon = document.createElement('i');
-    cellIcon.setAttribute('class', "fa fa-pencil-square-o");
-    cellIcon.setAttribute('onclick', "editTabung()");
+    let cellIcon = document.createElement('button');
+    cellIcon.setAttribute('class', "btnEmpty fa fa-pencil-square-o");
+    cellIcon.setAttribute('value', `${nama}`)
+    cellIcon.setAttribute('onclick', "editTabung(this.value)");
     tableData.appendChild(cellIcon);
   }
 }
 
-function editTabung() {
-  window.alert('edit');
+function editTabung(form) {
+  let answer = prompt('Tukar nama tabung?', form);
+  if (!answer) return;
+
+  let objIndex = parsedTabung.findIndex((obj => obj.nama == form));
+  parsedTabung = JSON.parse(localStorage.getItem("tabungs")); // updateTabung
+  parsedTabung[objIndex].nama = answer;
+
+  localStorage.setItem('tabungs', JSON.stringify(parsedTabung));
+  location.reload();
+  return false;
 }
 
-function initializeTabung() {
+function initializeTabungTable() {
 
+  if (parsedTabung == '[]') return; // skip tabung info build
+
+  let amaunSemua = 0.00;
+  for (let i = parsedTabung.length - 1; i >= 0; i--) {
+    let nama = parsedTabung[i].nama;
+    let amaun = parsedTabung[i].amaun;
+
+    addTabungTable(nama, amaun);
+    amaunSemua = parseFloat(amaunSemua + parseFloat(amaun)).toFixed(2);
+  }
+
+  document.getElementById('amaunSemua').innerHTML = `RM ${amaunSemua}`;
 }
-
-// function initializeTabung() {
-//   if (localStorage) {
-//     //
-//     const tabungA = localStorage.getItem("tabungA") || "A";
-//     const tabungB = localStorage.getItem("tabungB") || "B";
-//     const tabungC = localStorage.getItem("tabungC") || "C";
-//     const tabungD = localStorage.getItem("tabungD") || "D";
-
-//     // set the innerHTML values to the vars above
-//     document.getElementById("tabungA").innerHTML = `${tabungA}`;
-//     document.getElementById("tabungB").innerHTML = `${tabungB}`;
-//     document.getElementById("tabungC").innerHTML = `${tabungC}`;
-//     document.getElementById("tabungD").innerHTML = `${tabungD}`;
-
-//     let amaunA = 0;
-//     let amaunB = 0;
-//     let amaunC = 0;
-//     let amaunD = 0;
-
-//     // get amaun for each tabung
-//     for (let index = 0; index < parsedRekod.length; index++) {
-//       let amaun = parsedRekod[index].amaun;
-//       let tabung = parsedRekod[index].tabung;
-
-//       if (tabung == tabungA)
-//         amaunA = parseFloat(amaunA) + parseFloat(amaun);
-//       else if (tabung == tabungB)
-//         amaunB = parseFloat(amaunB) + parseFloat(amaun);
-//       else if (tabung == tabungC)
-//         amaunC = parseFloat(amaunC) + parseFloat(amaun);
-//       else if (tabung == tabungD)
-//         amaunD = parseFloat(amaunD) + parseFloat(amaun);
-//     }
-
-//     document.getElementById("amaunA").innerHTML = `${amaunA}`;
-//     document.getElementById("amaunB").innerHTML = `${amaunB}`;
-//     document.getElementById("amaunC").innerHTML = `${amaunC}`;
-//     document.getElementById("amaunD").innerHTML = `${amaunD}`;
-
-//     const amaunSemua = parseFloat(amaunA) + parseFloat(amaunB) + parseFloat(amaunC) + parseFloat(amaunD);
-//     document.getElementById("amaunSemua").innerHTML = `RM ${parseFloat(amaunSemua).toFixed(2)}`;
-//   }
-// }
-
-// let tdA = document.getElementById('tabungA');
-// let tdB = document.getElementById('tabungB');
-// let tdC = document.getElementById('tabungC');
-// let tdD = document.getElementById('tabungD');
-
-// tdA.addEventListener('input', function () {
-//   localStorage.setItem("tabungA", tdA.innerHTML)
-// })
-
-// tdB.addEventListener('input', function () {
-//   localStorage.setItem("tabungB", tdB.innerHTML)
-// })
-
-// tdC.addEventListener('input', function () {
-//   localStorage.setItem("tabungC", tdC.innerHTML)
-// })
-
-// tdD.addEventListener('input', function () {
-//   localStorage.setItem("tabungD", tdD.innerHTML)
-// })

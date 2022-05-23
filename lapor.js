@@ -1,38 +1,17 @@
-const parsedRekod = JSON.parse(localStorage.getItem("rekods")) || '[]';
-const selectTabung = document.getElementById("tabung");
-const selectTahun = document.getElementById("tahun");
-// var selectBulan = document.getElementById("bulan");
-
-// only list Tabung with available information
-function setTabung() {
-
-  let tabungs = [];
-
-  for (let index = 0; index < parsedRekod.length; index++) {
-    let tabung = parsedRekod[index].tabung;
-    if (tabung)
-      tabungs.push(tabung);
-  }
-
-  // build unique years as available options
-  let uniqueTabung = [...new Set(tabungs)];
-
-  for (let index = 0; index < uniqueTabung.length; index++) {
-    let tabung = uniqueTabung[index];
-    selectTabung.add(new Option(tabung, tabung));
-  }
-}
+var parsedTabung = JSON.parse(localStorage.getItem("tabungs")) || '[]';
+var parsedRekod = JSON.parse(localStorage.getItem("rekods")) || '[]';
 
 // only list available Tahun
 function setTahun(byTabung) {
+  let selectTahun = document.getElementById('tahun');
   for (a in selectTahun.options) { selectTahun.options.remove(0); }
 
   let years = [];
   // loop through all records in local storage
-  for (let index = 0; index < parsedRekod.length; index++) {
-    let tabung = parsedRekod[index].tabung;
+  for (let i = 0; i < parsedRekod.length; i++) {
+    let tabung = parsedRekod[i].tabung;
     if (byTabung == tabung) {
-      let tahun = parsedRekod[index].tarikh.slice(0, 4);
+      let tahun = parsedRekod[i].tarikh.slice(0, 4);
       years.push(tahun);
     }
   }
@@ -40,8 +19,8 @@ function setTahun(byTabung) {
   // build unique years as available options
   let uniqueYear = [...new Set(years)];
 
-  for (let index = 0; index < uniqueYear.length; index++) {
-    let tahun = uniqueYear[index];
+  for (let i = 0; i < uniqueYear.length; i++) {
+    let tahun = uniqueYear[i];
     selectTahun.add(new Option(tahun, tahun));
   }
 
@@ -75,36 +54,35 @@ function setLaporan(theForm) {
   let mytbl = document.getElementById("laporan");
   mytbl.getElementsByTagName("tbody")[0].innerHTML = mytbl.rows[0].innerHTML;
 
-  if (filtered.length) {
-    let arrHead = ['Tarikh', 'Perkara', 'Amaun'];
-    let empTab = document.getElementById('laporan');
-    let rowCnt = empTab.rows.length; // table row count.
+  if (!filtered.length) return;
 
-    for (let index = 0; index < filtered.length; index++) {
-      let tarikh = filtered[index].tarikh;
-      let perkara = filtered[index].perkara;
-      let amaun = filtered[index].amaun;
-      let tableRow = empTab.insertRow(rowCnt); // the table row.
+  let tableHead = ['Tarikh', 'Perkara', 'Amaun'];
+  let tableFull = document.getElementById('laporan');
 
-      for (let index = 0; index < arrHead.length; index++) {
-        let tableData = document.createElement('td'); // table definition.
-        tableData = tableRow.insertCell(index);
-        tableData.setAttribute('scope', 'row');
-        tableData.setAttribute('data-label', arrHead[index]);
-        let cellText = '';
+  for (let i = 0; i < filtered.length; i++) {
+    let transaksi = filtered[i].transaksi;
+    let tarikh = filtered[i].tarikh;
+    let perkara = filtered[i].perkara;
+    let amaun = filtered[i].amaun;
+    let tableRow = tableFull.insertRow(tableFull.rows.length); // the table row.
 
-        if (arrHead[index] == 'Tarikh') {
-          cellText = document.createTextNode(tarikh);
-        } else if (arrHead[index] == 'Perkara') {
-          cellText = document.createTextNode(perkara);
-        } else {
-          cellText = document.createTextNode(parseFloat(amaun).toFixed(2));
-        }
+    for (let i = 0; i < tableHead.length; i++) {
+      let tableData = document.createElement('td'); // table definition.
+      tableData = tableRow.insertCell(i);
+      tableData.setAttribute('scope', 'row');
+      tableData.setAttribute('data-label', tableHead[i]);
+      let cellText = '';
 
-        tableData.appendChild(cellText);
+      if (tableHead[i] == 'Tarikh') {
+        cellText = document.createTextNode(tarikh);
+      } else if (tableHead[i] == 'Perkara') {
+        cellText = document.createTextNode(perkara);
+      } else {
+        cellText = transaksi == 'penerimaan' ? document.createTextNode(parseFloat(amaun).toFixed(2)) : document.createTextNode(parseFloat(-amaun).toFixed(2));
       }
+
+      tableData.appendChild(cellText);
     }
+
   }
-  else
-    console.log("Tiada rekod");
 }

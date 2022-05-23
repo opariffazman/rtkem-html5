@@ -149,6 +149,14 @@ input {
   opacity: 1;
 }
 
+.btnEmpty {
+  color: var(--text-color);
+  border: none;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+}
+
 @media (pointer: coarse), (hover: none) {
   [title] {
     position: relative;

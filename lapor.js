@@ -1,6 +1,6 @@
-var parsedRekod = JSON.parse(localStorage.getItem("rekods")) || '[]';
-var selectTabung = document.getElementById("tabung");
-var selectTahun = document.getElementById("tahun");
+const parsedRekod = JSON.parse(localStorage.getItem("rekods")) || '[]';
+const selectTabung = document.getElementById("tabung");
+const selectTahun = document.getElementById("tahun");
 // var selectBulan = document.getElementById("bulan");
 
 // only list Tabung with available information
@@ -45,6 +45,12 @@ function setTahun(byTabung) {
     selectTahun.add(new Option(tahun, tahun));
   }
 
+  setBulan();
+}
+
+function setBulan() {
+  let bulan = document.getElementById('bulan');
+  bulan.value = '0';
 }
 
 function setLaporan(theForm) {
@@ -72,7 +78,7 @@ function setLaporan(theForm) {
   if (filtered.length) {
     let arrHead = ['Tarikh', 'Perkara', 'Amaun'];
     let empTab = document.getElementById('laporan');
-    let rowCnt = empTab.rows.length;   // table row count.
+    let rowCnt = empTab.rows.length; // table row count.
 
     for (let index = 0; index < filtered.length; index++) {
       let tarikh = filtered[index].tarikh;
@@ -80,16 +86,16 @@ function setLaporan(theForm) {
       let amaun = filtered[index].amaun;
       let tableRow = empTab.insertRow(rowCnt); // the table row.
 
-      for (let c = 0; c < arrHead.length; c++) {
-        let tableData = document.createElement('tableData'); // table definition.
-        tableData = tableRow.insertCell(c);
+      for (let index = 0; index < arrHead.length; index++) {
+        let tableData = document.createElement('td'); // table definition.
+        tableData = tableRow.insertCell(index);
         tableData.setAttribute('scope', 'row');
-        tableData.setAttribute('data-label', arrHead[c]);
+        tableData.setAttribute('data-label', arrHead[index]);
         let cellText = '';
 
-        if (arrHead[c] == 'Tarikh') {
+        if (arrHead[index] == 'Tarikh') {
           cellText = document.createTextNode(tarikh);
-        } else if (arrHead[c] == 'Perkara') {
+        } else if (arrHead[index] == 'Perkara') {
           cellText = document.createTextNode(perkara);
         } else {
           cellText = document.createTextNode(parseFloat(amaun).toFixed(2));

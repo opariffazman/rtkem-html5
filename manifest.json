@@ -1,0 +1,7 @@
+{
+  "name":"Rekod Tabung Kewangan Masjid",
+  "short_name":"RTKEM",
+  "start_url":"/rtkem-html5/",
+  "display":"standalone",
+  "orientation":"potrait"
+}

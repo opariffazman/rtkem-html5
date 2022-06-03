@@ -4,14 +4,14 @@
 }
 
 :root {
-  --background-color: #fff;
+  --background-color: #F7F8F8;
   --text-color: #121416d8;
   --highlight-color: lightseagreen;
   --color-scheme: light;
 }
 
 html[data-theme='light'] {
-  --background-color: #fff;
+  --background-color: #F7F8F8;
   --text-color: #121416d8;
   --color-scheme: light;
 }

@@ -73,14 +73,16 @@ function initializeTabungTable() {
 
   if (parsedTabung == '[]') return; // skip tabung info build
 
+  parsedTabung = JSON.parse(localStorage.getItem("tabungs"));
+
   let amaunSemua = 0.00;
   for (let i = parsedTabung.length - 1; i >= 0; i--) {
     let nama = parsedTabung[i].nama;
     let amaun = parsedTabung[i].amaun;
 
     addTabungTable(nama, amaun);
-    amaunSemua = parseFloat(amaunSemua + parseFloat(amaun)).toFixed(2);
+    amaunSemua = parseFloat(amaunSemua) + parseFloat(amaun);
   }
 
-  document.getElementById('amaunSemua').innerHTML = `RM ${amaunSemua}`;
+  document.getElementById('amaunSemua').innerHTML = `RM ${parseFloat(amaunSemua).toFixed(2)}`;
 }

@@ -56,3 +56,8 @@ function decreaseAmaun(tabung, amaun) {
 
   localStorage.setItem('tabungs', JSON.stringify(parsedTabung));
 }
+
+function clearStorage() {
+  localStorage.clear();
+  location.reload();
+}

@@ -12,11 +12,17 @@ function setInput(theForm) {
   document.getElementById("rekod").reset();
 }
 
+function generateUID() {
+  return Date.now().toString(36) + Math.random().toString(36).substring(2);
+}
+
 function addRekod(transaksi, tarikh, tabung, perkara, amaun) {
-  console.log("Rekod: " + transaksi + tarikh, tabung, perkara, amaun);
+  let uid = generateUID();
+  console.log("Rekod: " + uid, transaksi, tarikh, tabung, perkara, amaun);
 
   let rekods = [];
   let rekod = {
+    "uid": uid,
     "transaksi": transaksi,
     "tarikh": tarikh,
     "tabung": tabung,
@@ -28,24 +34,6 @@ function addRekod(transaksi, tarikh, tabung, perkara, amaun) {
   rekods = rekods.concat(JSON.parse(localStorage.getItem("rekods") || '[]'));
   console.log(rekods);
 
-  transaksi == 'penerimaan' ? increaseAmaun(tabung, amaun): decreaseAmaun(tabung, amaun);
+  transaksi == 'penerimaan' ? increaseAmaun(tabung, amaun) : decreaseAmaun(tabung, amaun);
   localStorage.setItem("rekods", JSON.stringify(rekods));
-}
-
-function increaseAmaun(tabung, amaun) {
-  parsedTabung = JSON.parse(localStorage.getItem("tabungs"));
-
-  let objIndex = parsedTabung.findIndex((obj => obj.nama == tabung));
-  parsedTabung[objIndex].amaun = parseFloat(parseFloat(parsedTabung[objIndex].amaun) + parseFloat(amaun)).toFixed(2);
-
-  localStorage.setItem('tabungs', JSON.stringify(parsedTabung));
-}
-
-function decreaseAmaun(tabung, amaun) {
-  parsedTabung = JSON.parse(localStorage.getItem("tabungs"));
-
-  let objIndex = parsedTabung.findIndex((obj => obj.nama == tabung));
-  parsedTabung[objIndex].amaun = parseFloat(parseFloat(parsedTabung[objIndex].amaun) - parseFloat(amaun)).toFixed(2);
-
-  localStorage.setItem('tabungs', JSON.stringify(parsedTabung));
 }

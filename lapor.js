@@ -60,6 +60,7 @@ function setLaporan(theForm) {
   let tableFull = document.getElementById('laporan');
 
   for (let i = 0; i < filtered.length; i++) {
+    let uid = filtered[i].uid;
     let transaksi = filtered[i].transaksi;
     let tarikh = filtered[i].tarikh;
     let perkara = filtered[i].perkara;
@@ -72,17 +73,70 @@ function setLaporan(theForm) {
       tableData.setAttribute('scope', 'row');
       tableData.setAttribute('data-label', tableHead[i]);
       let cellText = '';
+      let cellIcon = document.createElement('button');
+      cellIcon.setAttribute('class', "btnEmpty fa fa-pencil-square-o");
+      cellIcon.setAttribute('value', uid)
 
-      if (tableHead[i] == 'Tarikh') {
-        cellText = document.createTextNode(tarikh);
-      } else if (tableHead[i] == 'Perkara') {
-        cellText = document.createTextNode(perkara);
-      } else {
-        cellText = transaksi == 'penerimaan' ? document.createTextNode(parseFloat(amaun).toFixed(2)) : document.createTextNode(parseFloat(-amaun).toFixed(2));
+
+      switch (tableHead[i]) {
+        case 'Tarikh':
+          cellText = document.createTextNode(tarikh + " ");
+          tableData.setAttribute('value', tarikh);
+          cellIcon.setAttribute('onclick', "editRekod(this.value, 'tarikh', 0)");
+          break;
+        case 'Perkara':
+          cellText = document.createTextNode(perkara + " ");
+          tableData.setAttribute('value', perkara);
+          cellIcon.setAttribute('onclick', "editRekod(this.value, 'perkara', 0)");
+          break;
+        default:
+          if (transaksi == 'penerimaan') {
+            cellText = document.createTextNode("+ " + parseFloat(amaun).toFixed(2) + " ")
+            cellIcon.setAttribute('onclick', "editRekod(this.value, 'amaun', 'penerimaan')");
+          } else {
+            cellText = document.createTextNode("- " + parseFloat(amaun).toFixed(2) + " ")
+            cellIcon.setAttribute('onclick', "editRekod(this.value, 'amaun', 'pengeluaran')");
+          }
+          tableData.setAttribute('value', amaun);
+          break;
       }
 
       tableData.appendChild(cellText);
+      tableData.appendChild(cellIcon);
     }
 
   }
+}
+
+function editRekod(form, value, opt) {
+  parsedRekod = JSON.parse(localStorage.getItem("rekods")); // updateTabung
+  let objIndex = parsedRekod.findIndex((obj => obj.uid == form));
+  let answer;
+
+  switch (value) {
+    case 'tarikh':
+      answer = prompt('Ubah Tarikh?', parsedRekod[objIndex].tarikh);
+      if (!answer) return;
+      parsedRekod[objIndex].tarikh = answer;
+      break;
+    case 'perkara':
+      answer = prompt('Ubah Perkara?', parsedRekod[objIndex].perkara);
+      if (!answer) return;
+      parsedRekod[objIndex].perkara = answer;
+      break;
+    case 'amaun':
+      answer = prompt('Ubah Amaun?', parsedRekod[objIndex].amaun);
+      if (!answer) return;
+      parsedRekod[objIndex].amaun = answer;
+      if (opt == 'penerimaan') {
+        increaseAmaun(parsedRekod[objIndex].tabung, answer);
+      } else {
+        decreaseAmaun(parsedRekod[objIndex].tabung, answer);
+      }
+      break;
+  }
+
+  localStorage.setItem('rekods', JSON.stringify(parsedRekod));
+  location.reload();
+  return false;
 }

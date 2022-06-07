@@ -38,3 +38,21 @@ function toggleMode() {
   document.documentElement.setAttribute('data-theme', targetTheme);
   localStorage.setItem('theme', targetTheme);
 }
+
+function increaseAmaun(tabung, amaun) {
+  parsedTabung = JSON.parse(localStorage.getItem("tabungs"));
+
+  let objIndex = parsedTabung.findIndex((obj => obj.nama == tabung));
+  parsedTabung[objIndex].amaun = parseFloat(parseFloat(parsedTabung[objIndex].amaun) + parseFloat(amaun)).toFixed(2);
+
+  localStorage.setItem('tabungs', JSON.stringify(parsedTabung));
+}
+
+function decreaseAmaun(tabung, amaun) {
+  parsedTabung = JSON.parse(localStorage.getItem("tabungs"));
+
+  let objIndex = parsedTabung.findIndex((obj => obj.nama == tabung));
+  parsedTabung[objIndex].amaun = parseFloat(parseFloat(parsedTabung[objIndex].amaun) - parseFloat(amaun)).toFixed(2);
+
+  localStorage.setItem('tabungs', JSON.stringify(parsedTabung));
+}

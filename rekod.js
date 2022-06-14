@@ -7,8 +7,9 @@ function setInput(theForm) {
   let tabung = (theForm.elements['tabung']).value;
   let perkara = (theForm.elements['perkara']).value;
   let amaun = (theForm.elements['amaun']).value;
+  let kategori = (theForm.elements['kategori']).value;
 
-  addRekod(transaksi, tarikh, tabung, perkara, amaun);
+  addRekod(transaksi, tarikh, tabung, perkara, amaun, kategori);
   document.getElementById("rekod").reset();
 }
 
@@ -16,9 +17,9 @@ function generateUID() {
   return Date.now().toString(36) + Math.random().toString(36).substring(2);
 }
 
-function addRekod(transaksi, tarikh, tabung, perkara, amaun) {
+function addRekod(transaksi, tarikh, tabung, perkara, amaun, kategori) {
   let uid = generateUID();
-  console.log("Rekod: " + uid, transaksi, tarikh, tabung, perkara, amaun);
+  console.log("Rekod: " + uid, transaksi, tarikh, tabung, perkara, amaun, kategori);
 
   let rekods = [];
   let rekod = {
@@ -27,7 +28,8 @@ function addRekod(transaksi, tarikh, tabung, perkara, amaun) {
     "tarikh": tarikh,
     "tabung": tabung,
     "perkara": perkara,
-    "amaun": amaun
+    "amaun": amaun,
+    "kategori": kategori
   };
 
   rekods.push(rekod);

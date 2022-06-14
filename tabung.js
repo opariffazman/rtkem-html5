@@ -34,7 +34,7 @@ function addTabung() {
 function addTabungTable(nama, amaun) {
   let tabungHead = ['Tabung', 'Amaun'];
   let tabungTable = document.getElementById('tabung');
-  let tableRow = tabungTable.insertRow(tabungTable.rows.length - 1); // insert in between
+  let tableRow = tabungTable.insertRow(tabungTable.rows.length - 3); // insert in between
 
   for (let i = 0; i < tabungHead.length; i++) {
     let tableData = document.createElement('td'); // table definition.
@@ -84,5 +84,19 @@ function initializeTabungTable() {
     amaunSemua = parseFloat(amaunSemua) + parseFloat(amaun);
   }
 
+  parsedRekod = JSON.parse(localStorage.getItem("rekods"));
+
+  let amaunTunai = 0.00;
+  let amaunBank = 0.00;
+  for (let i = 0; i < parsedRekod.length; i++) {
+    if (parsedRekod[i].kategori == 'tunai') {
+      amaunTunai = parseFloat(amaunTunai) + parseFloat(parsedRekod[i].amaun);
+    } else {
+      amaunBank = parseFloat(amaunBank) + parseFloat(parsedRekod[i].amaun);
+    }
+  }
+
   document.getElementById('amaunSemua').innerHTML = `RM ${parseFloat(amaunSemua).toFixed(2)}`;
+  document.getElementById('amaunTunai').innerHTML = `RM ${parseFloat(amaunTunai).toFixed(2)}`;
+  document.getElementById('amaunBank').innerHTML = `RM ${parseFloat(amaunBank).toFixed(2)}`;
 }

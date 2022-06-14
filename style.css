@@ -157,12 +157,14 @@ input {
   cursor: pointer;
 }
 
-@media (pointer: coarse), (hover: none) {
+@media (pointer: coarse),
+(hover: none) {
   [title] {
     position: relative;
     display: inline-flex;
     justify-content: center;
   }
+
   [title]:focus::after {
     content: attr(title);
     position: absolute;
@@ -218,10 +220,11 @@ table td {
   text-align: center;
 }
 
-table th {
+table th, .tfoot {
   font-size: .85em;
   letter-spacing: .1em;
   text-transform: uppercase;
+  font-weight: bold;
 }
 
 @media screen and (max-width: 376px) {
@@ -233,8 +236,7 @@ table th {
     font-size: 1.3em;
   }
 
-  table thead,
-  .thLapor {
+  .thead {
     border: none;
     clip: rect(0 0 0 0);
     height: 1px;
@@ -259,10 +261,6 @@ table th {
   }
 
   table td::before {
-    /*
-    * aria-label has no advantage, it won't be read inside a table
-    content: attr(aria-label);
-    */
     content: attr(data-label);
     float: left;
     font-weight: bold;

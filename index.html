@@ -21,13 +21,13 @@
   </div>
 
   <div class="topnav" id="myTopnav">
-    <a href="javascript:void(0);" onclick="toggleMode()"><i class="fa fa-lightbulb-o"></i></a>
-    <a href="index.html" class="active"><i class="fa fa-home"></i> Utama</a>
-    <a href="rekod.html"><i class="fa fa-save"></i> Rekod</a>
-    <a href="lapor.html"><i class="fa fa-file-text-o"></i> Laporan</a>
-    <a href="javascript:void(0);" onclick="clearStorage()"><i class="fa fa-remove"></i> Reset</a>
+    <a href="javascript:void(0);" onclick="toggleMode()"><i class="fa fa-lightbulb-o" aria-hidden="true"></i></a>
+    <a href="index.html" class="active"><i class="fa fa-home" aria-hidden="true"></i> Utama</a>
+    <a href="rekod.html"><i class="fa fa-save" aria-hidden="true"></i> Rekod</a>
+    <a href="lapor.html"><i class="fa fa-file-text-o" aria-hidden="true"></i> Laporan</a>
+    <a href="javascript:void(0);" onclick="clearStorage()"><i class="fa fa-remove" aria-hidden="true"></i> Reset</a>
     <a href="javascript:void(0);" class="icon" onclick="menuFunction()">
-      <i class="fa fa-bars"></i>
+      <i class="fa fa-bars" aria-hidden="true"></i>
     </a>
   </div>
 
@@ -41,17 +41,25 @@
     <caption>Senarai Tabung</caption>
     <tbody>
       <tr>
-        <th scope="col">Tabung <i class="fa fa-bank"></i></th>
-        <th scope="col">Amaun <i class="fa fa-money"></i></th>
+        <th class="thead">Tabung <i class="fa fa-bank" aria-hidden="true"></i></th>
+        <th class="thead">Amaun <i class="fa fa-money" aria-hidden="true"></i></th>
       </tr>
       <tr>
-        <th scope="row" data-label="Tabung">Keseluruhan <i class="fa fa-usd"></i></th>
-        <th id="amaunSemua" data-label="Amaun"></th>
+        <td class="tfoot" data-label="Kategori">Tunai</td>
+        <td class="tfoot" data-label="Amaun" id="amaunTunai"></td>
+      </tr>
+      <tr>
+        <td class="tfoot" data-label="Kategori">Bank</td>
+        <td class="tfoot" data-label="Amaun" id="amaunBank"></td>
+      </tr>
+      <tr>
+        <td class="tfoot" data-label="Tabung">Keseluruhan <i class="fa fa-usd" aria-hidden="true"></i></td>
+        <td class="tfoot" data-label="Amaun" id="amaunSemua"></td>
       </tr>
     </tbody>
   </table>
   <br>
-  <button type="submit" class="btn" onclick="addTabung()">Tambah Tabung <i class="fa fa-plus-square"></i></button>
+  <button type="submit" class="btn" onclick="addTabung()">Tambah Tabung <i class="fa fa-plus-square" aria-hidden="true"></i></button>
 
 </body>
 

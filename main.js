@@ -58,6 +58,15 @@ function decreaseAmaun(tabung, amaun) {
 }
 
 function clearStorage() {
+
+  let isExecuted = confirm("Anda pasti untuk padam simpanan data?");
+  if (!isExecuted) return;
+
+  let answer = prompt("Sila taip: Padam Data");
+  if (answer != "Padam Data") return;
+
   localStorage.clear();
   location.reload();
+
+  alert("Data telah dipadamkan");
 }

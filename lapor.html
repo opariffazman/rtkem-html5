@@ -3,7 +3,7 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://kit.fontawesome.com/6b66f357e0.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -29,7 +29,7 @@
       <h2>Laporan Transaksi</h2>
 
       <div class="input-container">
-        <i class="fa fa-bank input-icon" aria-hidden="true"></i>
+        <i class="fa fa-vault input-icon" aria-hidden="true"></i>
         <select id="tabung" class="input-field" name="tabung" required onchange="setTahun(this.value)">
           <option value="" selected disabled hidden>Tabung</option>
         </select>
@@ -52,12 +52,13 @@
   </div>
 
   <table id="laporan">
-    <caption id="penyata">Penyata Pendapatan</caption>
+    <caption id="penyata"><i class="fa-solid fa-file-invoice-dollar" aria-hidden="true"></i> PENYATA</caption>
     <tbody>
       <tr>
-        <th class="thead">Tarikh <i class="fa fa-calendar" aria-hidden="true"></i></th>
-        <th class="thead">Perkara <i class="fa fa-list-alt" aria-hidden="true"></i></th>
-        <th class="thead">Amaun <i class="fa fa-money" aria-hidden="true"></i></th>
+        <th class="thead">Tarikh <br><i class="fa fa-calendar" aria-hidden="true"></i></th>
+        <th class="thead">Perkara <br><i class="fa fa-file-pen" aria-hidden="true"></i></th>
+        <th class="thead">Amaun <br><i class="fa fa-sack-dollar" aria-hidden="true"></i></th>
+        <th class="thead">Kategori <br><i class="fa fa-filter-circle-dollar" aria-hidden="true"></i></th>
       </tr>
     </tbody>
   </table>

@@ -56,7 +56,7 @@ function setLaporan(theForm) {
 
   if (!filtered.length) return;
 
-  let tableHead = ['Tarikh', 'Perkara', 'Amaun'];
+  let tableHead = ['Tarikh', 'Perkara', 'Amaun', 'Kategori'];
   let tableFull = document.getElementById('laporan');
 
   for (let i = 0; i < filtered.length; i++) {
@@ -65,6 +65,7 @@ function setLaporan(theForm) {
     let tarikh = filtered[i].tarikh;
     let perkara = filtered[i].perkara;
     let amaun = filtered[i].amaun;
+    let kategori = filtered[i].kategori;
     let tableRow = tableFull.insertRow(tableFull.rows.length); // the table row.
 
     for (let i = 0; i < tableHead.length; i++) {
@@ -77,7 +78,6 @@ function setLaporan(theForm) {
       cellIcon.setAttribute('class', "btnEmpty fa fa-pencil-square-o");
       cellIcon.setAttribute('value', uid)
 
-
       switch (tableHead[i]) {
         case 'Tarikh':
           cellText = document.createTextNode(tarikh + " ");
@@ -88,6 +88,16 @@ function setLaporan(theForm) {
           cellText = document.createTextNode(perkara + " ");
           tableData.setAttribute('value', perkara);
           cellIcon.setAttribute('onclick', "editRekod(this.value, 'perkara', 0)");
+          break;
+        case 'Kategori':
+          cellText = document.createElement("i");
+          if (kategori == 'tunai') {
+            cellText.innerHTML = `<i class="fa fa-money-bills" aria-hidden="true"></i>` + " "
+          } else {
+            cellText.innerHTML = `<i class="fa fa-bank" aria-hidden="true"></i>` + " "
+          }
+          tableData.setAttribute('value', kategori);
+          cellIcon.setAttribute('onclick', "editRekod(this.value, 'kategori', 0)");
           break;
         default:
           if (transaksi == 'penerimaan') {
@@ -106,6 +116,8 @@ function setLaporan(theForm) {
     }
 
   }
+
+  document.getElementById('penyata').innerHTML = `<i class="fa-solid fa-file-invoice-dollar" aria-hidden="true"></i> PENYATA ${tabung}`
 }
 
 function editRekod(form, value, opt) {
@@ -123,6 +135,11 @@ function editRekod(form, value, opt) {
       answer = prompt('Ubah Perkara?', parsedRekod[objIndex].perkara);
       if (!answer) return;
       parsedRekod[objIndex].perkara = answer;
+      break;
+    case 'kategori':
+      answer = prompt('Ubah Kategori?', parsedRekod[objIndex].kategori);
+      if (!answer) return;
+      parsedRekod[objIndex].kategori = answer;
       break;
     case 'amaun':
       answer = prompt('Ubah Amaun?', parsedRekod[objIndex].amaun);

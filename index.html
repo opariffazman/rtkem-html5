@@ -3,7 +3,7 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://kit.fontawesome.com/6b66f357e0.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="style.css">
   <script>
     if ('serviceWorker' in navigator) {
@@ -41,20 +41,20 @@
     <caption>Senarai Tabung</caption>
     <tbody>
       <tr>
-        <th class="thead">Tabung <i class="fa fa-bank" aria-hidden="true"></i></th>
-        <th class="thead">Amaun <i class="fa fa-money" aria-hidden="true"></i></th>
+        <th class="thead">Tabung <i class="fa fa-vault" aria-hidden="true"></i></th>
+        <th class="thead">Amaun <i class="fa fa-sack-dollar" aria-hidden="true"></i></th>
       </tr>
       <tr>
-        <td class="tfoot" data-label="Kategori">Tunai</td>
-        <td class="tfoot" data-label="Amaun" id="amaunTunai"></td>
+        <td class="tfoot" rowspan="4" data-label="Kategori">Amaun</td>
       </tr>
       <tr>
-        <td class="tfoot" data-label="Kategori">Bank</td>
-        <td class="tfoot" data-label="Amaun" id="amaunBank"></td>
+        <td class="tfoot" data-label="Keseluruhan" id="amaunSemua"></td>
       </tr>
       <tr>
-        <td class="tfoot" data-label="Tabung">Keseluruhan <i class="fa fa-usd" aria-hidden="true"></i></td>
-        <td class="tfoot" data-label="Amaun" id="amaunSemua"></td>
+        <td class="tfoot" data-label="Tunai" id="amaunTunai"></td>
+      </tr>
+      <tr>
+        <td class="tfoot" data-label="Bank" id="amaunBank"></td>
       </tr>
     </tbody>
   </table>
